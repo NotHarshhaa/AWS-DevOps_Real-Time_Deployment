@@ -3,16 +3,27 @@ version: 0.2
 phases:
   install:
     commands:
-      - echo Installing NGINX
-      - sudo apt-get update
-      - sudo apt-get install nginx -y
+      - echo "Installing required dependencies..."
+      - sudo apt-get update -y
+      - if ! dpkg -l | grep -qw nginx; then sudo apt-get install nginx -y; else echo "Nginx is already installed"; fi
+
   build:
     commands:
-      - echo Build started on `date`
-      - cp index.html /var/www/html/
+      - echo "Build started on $(date)"
+      - if [ -f index.html ]; then cp index.html /var/www/html/; else echo "Error: index.html not found!" && exit 1; fi
+
   post_build:
     commands:
-      - echo Configuring NGINX
+      - echo "Configuring and restarting Nginx..."
+      - sudo systemctl restart nginx
+      - echo "Nginx restarted successfully!"
+
+  test:
+    commands:
+      - echo "Running tests..."
+      - if systemctl is-active --quiet nginx; then echo "✅ Nginx is running"; else echo "❌ Nginx is not running!" && exit 1; fi
+      - echo "Testing if index.html is served..."
+      - if curl -s http://localhost | grep -q "<html>"; then echo "✅ index.html is being served successfully!"; else echo "❌ index.html is NOT served correctly!" && exit 1; fi
 
 artifacts:
   files:
