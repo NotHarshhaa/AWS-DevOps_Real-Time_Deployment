@@ -1,28 +1,95 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps/Cloud Blogs by HARSHHAA</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-        color: #333;
-        text-align: center;
-      }
-      
-      h1 {
-        font-size: 36px;
-        margin-top: 50px;
-        color: #6130e8;
-      }
-      
-      p {
-        font-size: 18px;
-        margin: 20px 0;
-      }
+        /* Google Font */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 650px;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(12px);
+            animation: fadeIn 1.5s ease-in-out;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff; /* Simple and minimal white color */
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        a {
+            display: inline-block;
+            background: linear-gradient(90deg, #7b2ff7, #d527b7);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 30px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(123, 47, 247, 0.4);
+        }
+
+        a:hover {
+            background: linear-gradient(90deg, #d527b7, #7b2ff7);
+            transform: scale(1.07);
+            box-shadow: 0 6px 15px rgba(123, 47, 247, 0.6);
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
-  </head>
-  <body>
-    <h1>DevOps/Cloud Blogs and Stories by HARSHHAA </h1>
-    <p>Follow me on Hashnode => https://harshhaa.hashnode.dev for such useful blogs </p>
-  </body>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🚀 DevOps & Cloud Blogs by HARSHHAA</h1>
+        <p>Discover high-quality insights on DevOps, Cloud, and Automation.</p>
+        <p>Follow me on Hashnode:</p>
+        <a href="https://blog.prodevopsguy.xyz" target="_blank">Read My Blogs</a>
+    </div>
+
+</body>
 </html>
