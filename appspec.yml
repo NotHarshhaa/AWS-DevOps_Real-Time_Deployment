@@ -1,6 +1,9 @@
+# AWS CodeDeploy Application Specification
+# This file defines the deployment configuration for the DevOps blog application
 version: 0.0
 os: linux
 
+# Define files to be deployed
 files:
   - source: /
     destination: /var/www/html
@@ -8,6 +11,7 @@ files:
     group: root
     mode: 755
 
+# Set proper permissions for web content
 permissions:
   - object: /var/www/html
     pattern: "**"
@@ -15,18 +19,32 @@ permissions:
     group: www-data
     mode: 755
 
+# Deployment lifecycle hooks
 hooks:
+  # Pre-deployment validation
   BeforeInstall:
     - location: scripts/validate_environment.sh
       timeout: 300
       runas: root
+      runorder: 1
 
+  # Install and configure Nginx
   AfterInstall:
     - location: scripts/install_nginx.sh
       timeout: 300
       runas: root
+      runorder: 1
 
+  # Start the application
   ApplicationStart:
     - location: scripts/start_nginx.sh
       timeout: 300
       runas: root
+      runorder: 1
+
+  # Optional: Add validation after deployment
+  AfterStart:
+    - location: scripts/validate_deployment.sh
+      timeout: 60
+      runas: root
+      runorder: 1

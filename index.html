@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevOps/Cloud Blogs by HARSHHAA</title>
+    <meta name="description" content="Discover high-quality insights on DevOps, Cloud, and Automation by HARSHHAA. Follow for expert DevOps and Cloud engineering content.">
+    <meta name="keywords" content="DevOps, Cloud, AWS, Automation, Infrastructure, CI/CD, Hashnode, Blog">
+    <meta name="author" content="HARSHHAA">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="DevOps & Cloud Blogs by HARSHHAA">
+    <meta property="og:description" content="Discover high-quality insights on DevOps, Cloud, and Automation.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://blog.prodevopsguytech.com">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DevOps & Cloud Blogs by HARSHHAA">
+    <meta name="twitter:description" content="Discover high-quality insights on DevOps, Cloud, and Automation.">
+    
+    <title>DevOps & Cloud Blogs by HARSHHAA | Expert DevOps Insights</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" as="style">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <style>
-        /* Google Font */
+        /* Google Font with fallback */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
         /* Reset and Base Styles */
@@ -16,19 +38,21 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: #fff;
             text-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
         .container {
             max-width: 650px;
+            width: 90%;
             background: rgba(255, 255, 255, 0.12);
             padding: 35px;
             border-radius: 15px;
@@ -36,6 +60,39 @@
             backdrop-filter: blur(12px);
             animation: fadeIn 1.5s ease-in-out;
             border: 2px solid rgba(255, 255, 255, 0.2);
+            margin: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+                margin: 10px;
+                width: 95%;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            p {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                margin: 5px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            p {
+                font-size: 14px;
+            }
         }
 
         h1 {
@@ -61,12 +118,24 @@
             border-radius: 30px;
             transition: all 0.3s ease-in-out;
             box-shadow: 0 4px 10px rgba(123, 47, 247, 0.4);
+            cursor: pointer;
+            border: 2px solid transparent;
         }
 
         a:hover {
             background: linear-gradient(90deg, #d527b7, #7b2ff7);
             transform: scale(1.07);
             box-shadow: 0 6px 15px rgba(123, 47, 247, 0.6);
+        }
+
+        a:focus {
+            outline: 3px solid rgba(123, 47, 247, 0.5);
+            outline-offset: 2px;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        a:active {
+            transform: scale(1.02);
         }
 
         /* Animation */
@@ -84,12 +153,37 @@
 </head>
 <body>
 
-    <div class="container">
+    <main id="main-content" class="container" role="main">
         <h1>🚀 DevOps & Cloud Blogs by HARSHHAA</h1>
         <p>Discover high-quality insights on DevOps, Cloud, and Automation.</p>
         <p>Follow me on Hashnode:</p>
-        <a href="https://blog.prodevopsguy.xyz" target="_blank">Read My Blogs</a>
-    </div>
+        <a href="https://blog.prodevopsguy.xyz" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           aria-label="Read DevOps and Cloud blogs by HARSHHAA on Hashnode">
+            Read My Blogs
+        </a>
+    </main>
+
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <style>
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 1000;
+        }
+        
+        .skip-link:focus {
+            top: 6px;
+        }
+    </style>
 
 </body>
 </html>

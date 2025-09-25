@@ -2,29 +2,77 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 18
     commands:
+      - echo "=== INSTALL PHASE STARTED ==="
       - echo "Installing required dependencies..."
       - sudo apt-get update -y
-      - if ! dpkg -l | grep -qw nginx; then sudo apt-get install nginx -y; else echo "Nginx is already installed"; fi
+      - echo "Checking Nginx installation status..."
+      - if ! dpkg -l | grep -qw nginx; then 
+          echo "Installing Nginx..."; 
+          sudo apt-get install nginx -y; 
+        else 
+          echo "✅ Nginx is already installed"; 
+        fi
+      - echo "=== INSTALL PHASE COMPLETED ==="
+
+  pre_build:
+    commands:
+      - echo "=== PRE-BUILD PHASE STARTED ==="
+      - echo "Validating source files..."
+      - if [ ! -f index.html ]; then echo "❌ Error: index.html not found!" && exit 1; fi
+      - echo "✅ Source files validated"
+      - echo "=== PRE-BUILD PHASE COMPLETED ==="
 
   build:
     commands:
+      - echo "=== BUILD PHASE STARTED ==="
       - echo "Build started on $(date)"
-      - if [ -f index.html ]; then cp index.html /var/www/html/; else echo "Error: index.html not found!" && exit 1; fi
+      - echo "Copying application files..."
+      - sudo cp index.html /var/www/html/
+      - echo "Setting proper permissions..."
+      - sudo chown -R www-data:www-data /var/www/html/
+      - sudo chmod -R 755 /var/www/html/
+      - echo "✅ Build completed successfully"
+      - echo "=== BUILD PHASE COMPLETED ==="
 
   post_build:
     commands:
+      - echo "=== POST-BUILD PHASE STARTED ==="
       - echo "Configuring and restarting Nginx..."
       - sudo systemctl restart nginx
-      - echo "Nginx restarted successfully!"
+      - sleep 2  # Allow Nginx to fully restart
+      - echo "✅ Nginx restarted successfully!"
+      - echo "=== POST-BUILD PHASE COMPLETED ==="
 
   test:
     commands:
-      - echo "Running tests..."
-      - if systemctl is-active --quiet nginx; then echo "✅ Nginx is running"; else echo "❌ Nginx is not running!" && exit 1; fi
-      - echo "Testing if index.html is served..."
-      - if curl -s http://localhost | grep -q "<html>"; then echo "✅ index.html is being served successfully!"; else echo "❌ index.html is NOT served correctly!" && exit 1; fi
+      - echo "=== TEST PHASE STARTED ==="
+      - echo "Running comprehensive tests..."
+      - echo "Testing Nginx service status..."
+      - if systemctl is-active --quiet nginx; then 
+          echo "✅ Nginx is running"; 
+        else 
+          echo "❌ Nginx is not running!" && exit 1; 
+        fi
+      - echo "Testing web server response..."
+      - if curl -s -f http://localhost | grep -q "<html>"; then 
+          echo "✅ index.html is being served successfully!"; 
+        else 
+          echo "❌ index.html is NOT served correctly!" && exit 1; 
+        fi
+      - echo "Testing HTTP status code..."
+      - HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost)
+      - if [ "$HTTP_STATUS" = "200" ]; then 
+          echo "✅ HTTP 200 response received"; 
+        else 
+          echo "❌ HTTP $HTTP_STATUS response received" && exit 1; 
+        fi
+      - echo "✅ All tests passed!"
+      - echo "=== TEST PHASE COMPLETED ==="
 
 artifacts:
   files:
     - '**/*'
+  name: deployment-artifacts-$(date +%Y%m%d-%H%M%S)
